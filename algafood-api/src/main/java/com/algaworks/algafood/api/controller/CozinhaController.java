@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 //import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.model.Cozinha;
-import com.algaworks.algafood.domain.model.CozinhasXmlWrapper;
+//import com.algaworks.algafood.domain.model.CozinhasXmlWrapper;
 import com.algaworks.algafood.domain.repository.CozinhaRepository;
 import com.algaworks.algafood.domain.service.CadastroCozinhaService;
 
@@ -40,12 +39,12 @@ public class CozinhaController {
 	public List<Cozinha> listar() {
 		return cozinhaRepository.listar();
 	}
-	
+/*	
 	@GetMapping(produces = {MediaType.APPLICATION_XML_VALUE})
 	public CozinhasXmlWrapper listarXml() {
 		return new CozinhasXmlWrapper(cozinhaRepository.listar());
 	}
-	
+*/	
 	@GetMapping("/{cozinhaId}")
 	public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId) {
 		Cozinha cozinha = cozinhaRepository.buscar(cozinhaId);
@@ -73,7 +72,7 @@ public class CozinhaController {
 			//cozinhaAtual.setNome(cozinha.getNome());
 			BeanUtils.copyProperties(cozinha, cozinhaAtual, "id"); //Ignora o atributo id recebido como null
 			
-			cozinhaAtual = cozinhaRepository.salvar(cozinhaAtual);
+			cozinhaAtual = cadastroCozinhaService.salvar(cozinhaAtual);
 			
 			return ResponseEntity.ok(cozinhaAtual);
 		}
