@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContext;
 
 import com.algaworks.algafood.AlgafoodApiApplication;
 import com.algaworks.algafood.domain.model.Cozinha;
-import com.algaworks.algafood.infrastructure.repository.CozinhaRepositoryImpl;
 
 public class InclusaoCozinhaMain {
 	
@@ -16,7 +15,7 @@ public class InclusaoCozinhaMain {
 					.web(WebApplicationType.NONE)
 					.run(args);
 			
-			CozinhaRepositoryImpl cozinhaRepositoryImpl = applicationContext.getBean(CozinhaRepositoryImpl.class);
+	//		CozinhaRepositoryImpl cozinhaRepositoryImpl = applicationContext.getBean(CozinhaRepositoryImpl.class);
 			
 			//INSERIR
 			Cozinha cozinha1 = new Cozinha();
@@ -26,8 +25,8 @@ public class InclusaoCozinhaMain {
 			Cozinha cozinha2 = new Cozinha();
 			cozinha2.setNome("Japonesa"); 
 			
-			cozinha1 = cozinhaRepositoryImpl.salvar(cozinha1);
-			cozinha2 = cozinhaRepositoryImpl.salvar(cozinha2);
+	//		cozinha1 = cozinhaRepositoryImpl.salvar(cozinha1);
+	//		cozinha2 = cozinhaRepositoryImpl.salvar(cozinha2);
 			
 			System.out.printf("%d - %s\n", cozinha1.getId(), cozinha1.getNome());
 			System.out.printf("%d - %s\n", cozinha2.getId(), cozinha2.getNome());

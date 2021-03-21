@@ -15,12 +15,14 @@ import com.algaworks.algafood.domain.repository.CozinhaRepository;
 @RequestMapping("/teste")
 public class TesteController {
 	
+	/*
 	@Autowired
 	private CozinhaRepository cozinhaRepository;
+	
 	
 	@GetMapping("/cozinhas/por-nome")
 	public List<Cozinha> cozinhasPorNome(@RequestParam("nome") String nome) {
 		return cozinhaRepository.consultarPorNome(nome);
-	}
+	}*/
 
 }
