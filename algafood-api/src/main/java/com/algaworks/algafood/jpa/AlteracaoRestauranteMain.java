@@ -8,7 +8,6 @@ import org.springframework.context.ApplicationContext;
 
 import com.algaworks.algafood.AlgafoodApiApplication;
 import com.algaworks.algafood.domain.model.Restaurante;
-import com.algaworks.algafood.infrastructure.repository.RestauranteRepositoryImpl;
 
 public class AlteracaoRestauranteMain {
 
@@ -18,7 +17,7 @@ public class AlteracaoRestauranteMain {
 					.web(WebApplicationType.NONE)
 					.run(args);
 			
-			RestauranteRepositoryImpl restauranteRepositoryImpl = applicationContext.getBean(RestauranteRepositoryImpl.class);
+			//RestauranteRepositoryImpl restauranteRepositoryImpl = applicationContext.getBean(RestauranteRepositoryImpl.class);
 			
 			Restaurante restaurante = new Restaurante();
 			
@@ -26,6 +25,6 @@ public class AlteracaoRestauranteMain {
 			restaurante.setNome("Brasileira");
 			restaurante.setTaxaFrete(BigDecimal.TEN);
 			
-			restauranteRepositoryImpl.salvar(restaurante);
+			//restauranteRepositoryImpl.salvar(restaurante);
 		}
 }

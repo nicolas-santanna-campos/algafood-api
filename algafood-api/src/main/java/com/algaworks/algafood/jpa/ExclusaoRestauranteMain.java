@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContext;
 
 import com.algaworks.algafood.AlgafoodApiApplication;
 import com.algaworks.algafood.domain.model.Restaurante;
-import com.algaworks.algafood.infrastructure.repository.RestauranteRepositoryImpl;
 
 public class ExclusaoRestauranteMain {
 
@@ -16,11 +15,11 @@ public class ExclusaoRestauranteMain {
 					.web(WebApplicationType.NONE)
 					.run(args);
 			
-			RestauranteRepositoryImpl restauranteRepositoryImpl = applicationContext.getBean(RestauranteRepositoryImpl.class);
+			//RestauranteRepositoryImpl restauranteRepositoryImpl = applicationContext.getBean(RestauranteRepositoryImpl.class);
 			
 			Restaurante restaurante= new Restaurante();
 			restaurante.setId(1L);
 						
-			restauranteRepositoryImpl.remover(restaurante);
+			//restauranteRepositoryImpl.remover(restaurante);
 	}
 }

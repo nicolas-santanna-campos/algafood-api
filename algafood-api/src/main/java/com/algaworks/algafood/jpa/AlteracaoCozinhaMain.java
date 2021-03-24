@@ -15,13 +15,13 @@ public class AlteracaoCozinhaMain {
 					.web(WebApplicationType.NONE)
 					.run(args);
 			
-		//	CozinhaRepositoryImpl cozinhaRepositoryImpl = applicationContext.getBean(CozinhaRepositoryImpl.class);
+			//cozinhaRepositoryImpl cozinhaRepositoryImpl = applicationContext.getBean(CozinhaRepositoryImpl.class);
 			
 			Cozinha cozinha = new Cozinha();
 			
 			cozinha.setId(1L);
 			cozinha.setNome("Brasileira");
 			
-		//	cozinhaRepositoryImpl.salvar(cozinha);
+			//cozinhaRepositoryImpl.salvar(cozinha);
 		}
 }
