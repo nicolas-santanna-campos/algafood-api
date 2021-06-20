@@ -12,7 +12,8 @@ import org.springframework.stereotype.Repository;
 import com.algaworks.algafood.domain.model.Restaurante;
 
 @Repository
-public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
+public interface RestauranteRepository 
+			extends JpaRepository<Restaurante, Long>, RestauranteRepositoryQueries {
 
 	//Podem também ser usadas outras palavras chave no início do método: find, read, query, stream, exists, count ou get.
 	
