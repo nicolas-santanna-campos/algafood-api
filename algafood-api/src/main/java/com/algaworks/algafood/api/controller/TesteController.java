@@ -69,9 +69,9 @@ public class TesteController {
 	}
 	
 	@GetMapping("/restaurantes/por-nome-e-frete")
-	public List<Restaurante> restaurantesPorNomeFrete(@RequestParam("nome") String nome,
-													  @RequestParam("taxaInicial") BigDecimal taxaInicial,
-										 	 		  @RequestParam("taxaFinal") BigDecimal taxaFinal) {
+	public List<Restaurante> restaurantesPorNomeFrete(String nome,
+													  BigDecimal taxaInicial,
+										 	 		  BigDecimal taxaFinal) {
 		return restauranteRepository.find(nome, taxaInicial, taxaFinal);
 	}
 	
