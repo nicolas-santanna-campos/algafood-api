@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -43,5 +45,6 @@ public class Restaurante {
 	@JoinTable(name = "restaurante_forma_pagamento", 
 			   joinColumns =  @JoinColumn(name = "restaurante_id"),
 			   inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
+	@JsonIgnore
 	private List<FormaPagamento> formasPagamento = new ArrayList<>();
 }
