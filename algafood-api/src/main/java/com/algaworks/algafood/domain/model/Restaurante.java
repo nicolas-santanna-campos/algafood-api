@@ -41,8 +41,8 @@ public class Restaurante {
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 
-	//Muitos restaurantes possuem uma cozinha.
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne 	//Muitos restaurantes possuem uma cozinha.
 	@JoinColumn (name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
 	
