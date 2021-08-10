@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 //import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -31,4 +32,7 @@ public interface RestauranteRepository
 	List<Restaurante> findTop2ByNomeContaining(String nome);
 	
 	int countByCozinhaId(Long cozinhaId);
+	
+	@Query("from Restaurante r join fetch r.cozinha left join fetch r.formasPagamento")
+	List<Restaurante> findAll();
 }
