@@ -30,7 +30,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	/*															 *
 	 *  MÉTODOS SOBRESCRITOS PARA PERSONALIZAÇÃO DE TRATAMENTO   *
 	 *   														 */
-	
+
+
 	//Utilizado para tratar requisições em que o json enviado está fora do padrão. Exemplo, uma virgula onde não deveria. Ou com atributos a mais do que o solicitado.
 	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
@@ -95,12 +96,12 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return super.handleExceptionInternal(ex, body, headers, status, request);
 	}
 
-	
-	/*															 		*
-	 *  MÉTODOS INTERNOS PARA PERSONALIZAÇÃO DE TRATAMENTO DE EXCEÇÕES  *
-	 *   														 		*/
 
-	
+	/*															 							   *
+	 *  MÉTODOS INTERNOS UTILIZADOS PARA PERSONALIZAÇÃO DE TRATAMENTO DE MÉTODOS SOBRESCRITOS  *
+	 *   														 							   */
+
+
 	//Utilizado para tratar requisições em que o valor do atributo foi enviado com um tipo de dado incompatível. 
 	private ResponseEntity<Object> handleInvalidFormat(InvalidFormatException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
@@ -145,7 +146,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	/*											*
 	 *  TRATAMENTO DE EXCEÇÕES PERSONALIZADAS   *
 	 *   										*/
-	 	
+
+	
 	@ExceptionHandler(EntidadeNaoEncontradaException.class)
 	public ResponseEntity<?> handleEntidadeNaoEncontrada(
 			EntidadeNaoEncontradaException ex, WebRequest request) {
@@ -184,11 +186,28 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
 	}
 	
-	
-	/*											 *
-	 *  MÉTODOS FACILITADORES PARA USO NA CLASSE *
-	 *   										 */
-	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<Object> handleUncaught(Exception ex, WebRequest request) {
+	    
+		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;		
+	    ProblemType problemType = ProblemType.ERRO_DE_SISTEMA;
+	    String detail = "Ocorreu um erro interno inesperado no sistema. "
+	            + "Tente novamente e se o problema persistir, entre em contato "
+	            + "com o administrador do sistema.";
+
+	    ex.printStackTrace();
+	    
+	    Problem problem = createProblemBuilder(status, problemType, detail).build();
+
+	    return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+	}                         
+
+
+	/*	  								 		  *
+	 *  MÉTODOS FACILITADORES PARA USO NA CLASSE  *
+	 *   										  */
+
+
 	private Problem.ProblemBuilder createProblemBuilder(HttpStatus status,
 			ProblemType problemType, String detail) {
 		
