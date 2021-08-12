@@ -69,6 +69,7 @@
 		<artifactId>flyway-core</artifactId>
 	</dependency>
 	
+	<!--Utilizado para tratar requisições em que o json enviado está fora do padrão. Exemplo, uma virgula onde não deveria.--> 
 	<dependency>
 		<groupId>org.apache.commons</groupId>
 		<artifactId>commons-lang3</artifactId>

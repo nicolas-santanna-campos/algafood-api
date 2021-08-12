@@ -20,6 +20,10 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
+	
+	/**
+	 * Utilizado para tratar requisições em que o json enviado está fora do padrão. Exemplo, uma virgula onde não deveria. Ou com atributos a mais do que o solicitado.
+	 */
 	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -37,6 +41,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, problem, headers, status, request);
 	}
 	
+	/**
+	 * Utilizado para tratar requisições em que o valor do atributo foi enviado com um tipo de dado incompatível. 
+	 */
 	private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
