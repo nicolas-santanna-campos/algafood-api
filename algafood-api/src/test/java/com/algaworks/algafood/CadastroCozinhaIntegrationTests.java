@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.algaworks.algafood.domain.exception.CozinhaNaoEncontradaException;
+import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.service.CadastroCozinhaService;
 
@@ -19,28 +21,38 @@ public class CadastroCozinhaIntegrationTests {
 
 	@Autowired
 	private CadastroCozinhaService cadastroCozinhaService;
-	
+
 	@Test
 	public void deveAtribuirId_QuandoCadastrarCozinhaComDadosCorretos() {
-		//cenário
+		// cenário
 		Cozinha novaCozinha = new Cozinha();
 		novaCozinha.setNome("Chinesa");
-		
-		//ação
+
+		// ação
 		novaCozinha = cadastroCozinhaService.salvar(novaCozinha);
-		
-		//validação
+
+		// validação
 		assertThat(novaCozinha).isNotNull();
 		assertThat(novaCozinha.getId()).isNotNull();
 	}
 
 	@Test(expected = ConstraintViolationException.class)
 	public void devefalhar_QuandoCadastrarCozinhaSemNome() {
-		//cenário
+		// cenário
 		Cozinha novaCozinha = new Cozinha();
 		novaCozinha.setNome(null);
-		
-		//ação
+
+		// ação
 		novaCozinha = cadastroCozinhaService.salvar(novaCozinha);
+	}
+
+	@Test(expected = EntidadeEmUsoException.class)
+	public void deveFalhar_QuandoExcluirCozinhaEmUso() {
+		cadastroCozinhaService.excluir(1L);
+	}
+
+	@Test(expected = CozinhaNaoEncontradaException.class)
+	public void deveFalhar_QuandoExcluirCozinhaInexistente() {
+		cadastroCozinhaService.excluir(100L);
 	}
 }
