@@ -23,15 +23,15 @@ public class CadastroCozinhaIT {
 	private int port;
 
 	@Before
-	public void setup() {
+	public void setUp() {
 		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+		RestAssured.port = port;
+		RestAssured.basePath = "/cozinhas";
 	}
 	
 	@Test
 	public void deveRetornarStatus200_QuandoConsultarCozinhas() {
 		given()
-			.basePath("/cozinhas")
-			.port(port)
 			.accept(ContentType.JSON)
 		.when()
 			.get()
@@ -42,13 +42,11 @@ public class CadastroCozinhaIT {
 	@Test
 	public void deveConter4Cozinhas_QuandoConsultarCozinhas() {
 		given()
-			.basePath("/cozinhas")
-			.port(port)
 			.accept(ContentType.JSON)
 		.when()
 			.get()
 		.then()
 			.body("", hasSize(4))
-			.body("nome", hasItems("Indiana", "Tailandesa"));
+			.body("titulo", hasItems("Indiana", "Tailandesa"));
 	}
 }
