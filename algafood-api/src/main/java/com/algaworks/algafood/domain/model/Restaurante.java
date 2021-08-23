@@ -29,8 +29,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.algaworks.algafood.api.core.validation.Groups;
 import com.algaworks.algafood.api.core.validation.Multiplo;
 import com.algaworks.algafood.api.core.validation.ValorZeroIncluiDescricao;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -48,25 +46,16 @@ public class Restaurante {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-//	@NotNull
-//	@NotEmpty
 	@NotBlank
 	@Column(nullable = false)
 	private String nome;
 	
-//	@DecimalMin("0")
-//	@PositiveOrZero (message = "{TaxaFrete.invalida}")
-//	@TaxaFrete
 	@NotNull
 	@PositiveOrZero
 	@Multiplo(numero = 5)
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 
-//  @JsonIgnoreProperties("hibernateLazyInitializer")
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JsonIgnore
-	@JsonIgnoreProperties(value = {"nome"}, allowGetters = true) //Quando serializar ou desserializar ignora o nome da propriedade cozinha.
 	@Valid
 	@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
 	@NotNull
@@ -79,24 +68,19 @@ public class Restaurante {
 	@JoinTable(name = "restaurante_forma_pagamento", 
 			   joinColumns =  @JoinColumn(name = "restaurante_id"),
 			   inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
-	@JsonIgnore
 	private List<FormaPagamento> formasPagamento = new ArrayList<>();
 	
-	@JsonIgnore
 	@Embedded
 	private Endereco endereco;
 	
 	@CreationTimestamp
-	@JsonIgnore
 	@Column(nullable = false, columnDefinition = "datetime")
 	private LocalDateTime dataCadastro;
 	
 	@UpdateTimestamp
-	@JsonIgnore
 	@Column(nullable = false, columnDefinition = "datetime")
 	private LocalDateTime dataAtualizacao;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "restaurante")
-	private List<Produto> produtos;
+	private List<Produto> produtos = new ArrayList<>();
 }
