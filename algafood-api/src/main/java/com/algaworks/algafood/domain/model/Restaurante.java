@@ -8,7 +8,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -64,12 +63,14 @@ public class Restaurante {
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 
+//  @JsonIgnoreProperties("hibernateLazyInitializer")
+//	@ManyToOne(fetch = FetchType.LAZY)
 //	@JsonIgnore
+	@JsonIgnoreProperties(value = {"nome"}, allowGetters = true) //Quando serializar ou desserializar ignora o nome da propriedade cozinha.
 	@Valid
 	@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
 	@NotNull
-	@JsonIgnoreProperties({"hibernateLazyInitializer"})
-	@ManyToOne(fetch = FetchType.LAZY)	//Muitos restaurantes possuem uma cozinha.
+	@ManyToOne //Muitos restaurantes possuem uma cozinha.
 	@JoinColumn (name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
 	
