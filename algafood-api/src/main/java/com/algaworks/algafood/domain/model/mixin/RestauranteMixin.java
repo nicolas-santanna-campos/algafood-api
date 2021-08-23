@@ -11,7 +11,7 @@ import com.algaworks.algafood.domain.model.Produto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-public class RestauranteMixin {
+public abstract class RestauranteMixin {
 	
 	@JsonIgnoreProperties(value = {"nome"}, allowGetters = true) //Quando serializar ou desserializar ignora o nome da propriedade cozinha.
 	private Cozinha cozinha;
@@ -29,5 +29,5 @@ public class RestauranteMixin {
 	private List<FormaPagamento> formasPagamento = new ArrayList<>();
 	
 	@JsonIgnore
-	private List<Produto> produtos = new ArrayList<>();
+	private List<Produto> produtos;
 }

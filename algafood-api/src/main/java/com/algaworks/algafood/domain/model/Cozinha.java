@@ -13,8 +13,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.algaworks.algafood.api.core.validation.Groups;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.Data;
@@ -33,11 +31,9 @@ public class Cozinha {
 	private Long id;
 	
 	@NotBlank
-  	@JsonProperty(value = "titulo")
 	@Column(nullable = false)
 	private String nome;
 	
-  	@JsonIgnore
 	@OneToMany(mappedBy = "cozinha")
 	private List<Restaurante> restaurantes = new ArrayList<>();
 }
