@@ -44,7 +44,7 @@ public class GrupoController {
 	public List<GrupoModel> listar() {
 		List<Grupo> todosGrupos = grupoRepository.findAll();
 		
-		return grupoModelAssembler.toCollecticonModel(todosGrupos);
+		return grupoModelAssembler.toCollectionModel(todosGrupos);
 	}
 	
 	@GetMapping("/{grupoId}")
